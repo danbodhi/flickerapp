@@ -1,0 +1,8 @@
+$(".thumbnails").empty();
+var data = <%= @json_body %>;
+
+$.each(data.photos.photo, function(key, val) {
+	$(".thumbnails").append("<li><a href='http://farm" + val.farm + ".staticflickr.com/" + val.server + "/" + val.id + "_" + val.secret + "_b.jpg' class='thumbnail' rel='search'><img src='http://farm" + val.farm + ".staticflickr.com/" + val.server + "/" + val.id + "_" + val.secret + "_q.jpg' /></a></li>");
+});
+
+$(".thumbnail").fancybox();
