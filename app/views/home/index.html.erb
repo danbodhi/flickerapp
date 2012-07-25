@@ -1,6 +1,6 @@
-<%= form_tag '/home/search', :class => "well form-search", :id => "photo_search", :remote => true  do %>
+<%= form_tag '/home/search', :class => "form-search", :id => "photo_search", :remote => true  do %>
 	<%= search_field_tag 'photosearch', nil, :placeholder => 'Search photos...', :class => "search-query" %>
 	<%= submit_tag 'Search', :class => "btn btn-primary" %>
 <% end %>
-<ul class="thumbnails">
+<ul class="well thumbnails">
 </ul>

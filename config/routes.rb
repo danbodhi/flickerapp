@@ -1,6 +1,7 @@
 Flickrapp::Application.routes.draw do
   get 'home' => 'home#index'
   post 'home/search'
+  get 'home/get_page'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

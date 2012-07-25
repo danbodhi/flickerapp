@@ -1,8 +1,35 @@
 $(".thumbnails").empty();
 var data = <%= @json_body %>;
 
+var search_text = "<%= @search_text %>";
+
+if (data.photos.pages > 1) {
+	var pNumber = data.photos.page
+	$(".thumbnails").append("<ul class='pager'></ul>");
+	
+	if(data.photos.page == 1) {
+		$(".pager").append("<li class='next'><a href='#' id='nav-next' rel='" + (pNumber + 1) + "'>Next</a></li>");
+	}
+	else {
+		if (data.photos.page == data.photos.pages) {
+			$(".pager").append("<li class='previous'><a href='#' id='nav-prev' rel='" + (pNumber - 1) + "'>Previous</a></li>");
+		}
+		else {
+			$(".pager").append("<li class='previous'><a href='#' id='nav-prev' rel='" + (pNumber - 1) + "'>Previous</a></li><li class='next'><a href='#' id='nav-next' rel='" + (pNumber + 1) + "'>Next</a></li>");
+		}
+	}
+}
+
 $.each(data.photos.photo, function(key, val) {
 	$(".thumbnails").append("<li><a href='http://farm" + val.farm + ".staticflickr.com/" + val.server + "/" + val.id + "_" + val.secret + "_b.jpg' class='thumbnail' rel='search'><img src='http://farm" + val.farm + ".staticflickr.com/" + val.server + "/" + val.id + "_" + val.secret + "_q.jpg' /></a></li>");
 });
 
 $(".thumbnail").fancybox();
+
+$("#nav-prev").click(function () {
+	$.get('/home/get_page.js', { photosearch : search_text, page : $(this).attr('rel') }, null, "script");
+});
+
+$("#nav-next").click(function () {
+	$.get('/home/get_page.js', { photosearch : search_text, page : $(this).attr('rel') }, null, "script");
+});
